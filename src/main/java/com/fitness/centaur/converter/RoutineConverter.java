@@ -16,8 +16,6 @@ public class RoutineConverter implements Converter<Routine, RoutineDTO> {
         routineDTO.setId(routine.getId());
         routineDTO.setName(routine.getName());
         routineDTO.setRoutineType(routine.getRoutineType());
-        /*routineDTO.setExercises(routine.getFeatures());*/
-
         return routineDTO;
     }
 
