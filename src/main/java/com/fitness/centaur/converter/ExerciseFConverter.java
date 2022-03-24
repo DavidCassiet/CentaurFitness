@@ -18,14 +18,23 @@ public class ExerciseFConverter implements Converter<ExerciseFeatures, ExerciseF
         return exerciseFeatures;
     }
 
-    public ExerciseFeatures convertToEntity(Exercise exercise) {
+    public ExerciseFeatures convertToEF(Exercise exercise) {
         ExerciseFeatures exerciseFeatures = new ExerciseFeatures();
         exerciseFeatures.setName(exercise.getName());
         exerciseFeatures.setDescription(exercise.getDescription());
         return exerciseFeatures;
     }
+
+    public ExerciseFeatures convertToEF(ExercisePDTO exercisePDTO, ExerciseFeatures exerciseFeatures) {
+        exerciseFeatures.setSeasons(exercisePDTO.getSeasons());
+        exerciseFeatures.setRepetitions(exercisePDTO.getRepetitions());
+        exerciseFeatures.setWeight(exercisePDTO.getWeight());
+        return exerciseFeatures;
+    }
+
     public ExercisePDTO convertToEPDTO(ExerciseFeatures exerciseFeatures) {
         ExercisePDTO exercisePDTO = new ExercisePDTO();
+        exercisePDTO.setId(exerciseFeatures.getId());
         exercisePDTO.setExercise(exerciseFeatures.getName());
         exercisePDTO.setSeasons(exerciseFeatures.getSeasons());
         exercisePDTO.setRepetitions(exerciseFeatures.getRepetitions());
