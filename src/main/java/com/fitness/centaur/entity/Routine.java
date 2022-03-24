@@ -13,8 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +35,16 @@ public class Routine {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private List<Exercise> exercises = new ArrayList<>();
+    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExerciseFeatures> exercises = new ArrayList<>();
 
-    public void addExercise(Exercise exercise) {
+    public void addExercise(ExerciseFeatures exercise) {
         exercises.add(exercise);
-        exercise.getRoutines().add(this);
+        exercise.setRoutine(this);
     }
 
-    public void removeExercise(Exercise exercise) {
+    public void removeExercise(ExerciseFeatures exercise) {
         exercises.remove(exercise);
-        exercise.getRoutines().remove(null);
+        exercise.setRoutine(null);
     }
 }
